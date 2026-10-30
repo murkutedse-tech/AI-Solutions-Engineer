@@ -197,6 +197,8 @@ def create_app(
 
     async def forward(request: Request, principal: Principal, body: bytes | None, msg_id: JsonRpcId) -> Response:
         headers = {k: v for k in FORWARD_REQUEST_HEADERS if (v := request.headers.get(k)) is not None}
+        if body is not None:
+            headers["content-type"] = "application/json"  # we send our own re-serialized JSON, whatever the client claimed
         headers["x-authenticated-subject"] = principal.subject
         headers["x-authenticated-role"] = principal.role
         upstream_req = client.build_request(request.method, config.downstream_url, headers=headers, content=body)
