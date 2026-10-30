@@ -147,3 +147,15 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# Local runtime state (Task 4 rate-limiter database)
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
